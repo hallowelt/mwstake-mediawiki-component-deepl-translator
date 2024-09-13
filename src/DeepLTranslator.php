@@ -1,6 +1,6 @@
 <?php
 
-namespace BlueSpice\TranslationTransfer;
+namespace MWStake\MediaWiki\Component\DeeplTranslator;
 
 use Config;
 use Exception;

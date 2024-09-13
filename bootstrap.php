@@ -22,4 +22,8 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-
 		],
 		'localBasePath' => __DIR__ . '/resources'
 	];
+
+	$restFilePath = wfRelativePath( __DIR__ . '/rest-routes.json', $GLOBALS['IP'] );
+
+	$GLOBALS['wgRestAPIAdditionalRouteFiles'][] = $restFilePath;
 } );

@@ -1,0 +1,8 @@
+[
+	{
+		"method": "POST",
+		"path": "/mws/v1/deepl/translate",
+		"class": "MWStake\\MediaWiki\\Component\\DeeplTranslator\\TranslateHandler",
+		"services": [ "MWStake.DeepLTranslator" ]
+	}
+]

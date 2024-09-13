@@ -10,7 +10,7 @@ if ( defined( 'MWSTAKE_MEDIAWIKI_COMPONENT_DEEPL_TRANSLATOR_VERSION' ) ) {
 
 define( 'MWSTAKE_MEDIAWIKI_COMPONENT_DEEPL_TRANSLATOR_VERSION', '1.0.0' );
 
-MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'formengine', static function () {
+MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-translator', static function () {
 	$GLOBALS['wgServiceWiringFiles'][] = __DIR__ . '/ServiceWiring.php';
 
 	$GLOBALS['mwsgDeeplTranslateServiceAuth'] = '';

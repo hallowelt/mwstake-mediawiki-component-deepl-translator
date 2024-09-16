@@ -42,10 +42,10 @@ class DeepLTranslator {
 	 * @param string $targetLang
 	 * @return Status
 	 */
-	public function translateText( string $text, string $sourceLang, string $targetLang ) {
+	public function translateText( string $text, string $sourceLang, string $targetLang, array $options = [] ) {
 		$status = Status::newGood();
 		try {
-			$req = $this->getRequest( $text, $sourceLang, $targetLang );
+			$req = $this->getRequest( $text, $sourceLang, $targetLang, $options );
 			$status->merge( $req->execute(), true );
 		} catch ( Exception $e ) {
 			$status->fatal( $e->getMessage() );
@@ -61,6 +61,31 @@ class DeepLTranslator {
 		}
 
 		return Status::newGood( $res->translations[0]->text );
+	}
+
+	/**
+	 * @return Status
+	 */
+	public function getSupportedLanguages( string $type = 'source' ): Status {
+		$status = Status::newGood();
+		try {
+			$data = array_merge(
+				$this->makeOptions(),
+				[ 'postData' => [
+					static::PARAM_AUTH_KEY => $this->config->get( 'DeeplTranslateServiceAuth' ),
+					'type' => $type
+				] ]
+			);
+			$req = $this->requestFactory->create( $this->makeUrl( 'languages' ), $data );
+			$status->merge( $req->execute(), true );
+		} catch ( Exception $e ) {
+			$status->fatal( $e->getMessage() );
+		}
+		if ( !$status->isOK() ) {
+			return $status;
+		}
+
+		return Status::newGood( FormatJson::decode( $req->getContent() ) );
 	}
 
 	/**
@@ -100,25 +125,34 @@ class DeepLTranslator {
 	 * @param string $targetLanguage
 	 * @return MWHttpRequest
 	 */
-	public function getRequest( string $text, string $sourceLanguage, string $targetLanguage ): MWHttpRequest {
+	public function getRequest(
+		string $text, string $sourceLanguage, string $targetLanguage, array $options = []
+	): MWHttpRequest {
 		$data = array_merge_recursive(
 			$this->makeOptions(),
+			$options,
 			[
 				'postData' => $this->makePostData(
 					$text,
 					strtoupper( $sourceLanguage ),
 					strtoupper( $targetLanguage )
 				)
-			]
+			],
 		);
-		return $this->requestFactory->create( $this->makeUrl(), $data );
+		return $this->requestFactory->create( $this->makeUrl( 'translate' ), $data );
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	protected function makeUrl() {
-		return $this->config->get( 'DeeplTranslateServiceUrl' );
+	protected function makeUrl( string $endpoint = 'translate' ) {
+		$url = $this->config->get( 'DeeplTranslateServiceUrl' );
+		if ( substr( $url, -strlen( $endpoint ) ) === $endpoint ) {
+			// B/C
+			return $url;
+		}
+		$url = rtrim( $url, '/' );
+		return $url . '/' . $endpoint;
 	}
 }

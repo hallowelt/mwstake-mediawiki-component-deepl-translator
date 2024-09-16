@@ -4,5 +4,11 @@
 		"path": "/mws/v1/deepl/translate",
 		"class": "MWStake\\MediaWiki\\Component\\DeeplTranslator\\TranslateHandler",
 		"services": [ "MWStake.DeepLTranslator" ]
+	},
+	{
+		"path": "/mws/v1/deepl/get_supported_languages",
+		"method": "GET",
+		"class": "MWStake\\MediaWiki\\Component\\DeeplTranslator\\SupportedLanguagesHandler",
+		"services": [ "MWStake.DeepLTranslator" ]
 	}
 ]

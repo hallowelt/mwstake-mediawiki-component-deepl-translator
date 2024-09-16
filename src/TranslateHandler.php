@@ -41,7 +41,7 @@ class TranslateHandler extends SimpleHandler {
 	}
 
 	/**
-	 * @param $contentType
+	 * @param string $contentType
 	 * @return JsonBodyValidator|null
 	 */
 	public function getBodyValidator( $contentType ) {

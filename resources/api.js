@@ -1,6 +1,7 @@
 mws.deepltranslator = {
 	translateText: function( text, fromLang, toLang ) {
-		return $.ajax( {
+		var dfd = $.Deferred();
+		$.ajax( {
 			method: 'POST',
 			url: mw.util.wikiScript( 'rest' ) + '/mws/v1/deepl/translate',
 			contentType: 'application/json',
@@ -10,6 +11,10 @@ mws.deepltranslator = {
 				target_lang: toLang
 			} ),
 			dataType: 'json'
+		} ).done( function( data ) {
+			dfd.resolve( data );
 		} );
+
+		return dfd.promise();
 	}
 };

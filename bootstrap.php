@@ -8,7 +8,7 @@ if ( defined( 'MWSTAKE_MEDIAWIKI_COMPONENT_DEEPL_TRANSLATOR_VERSION' ) ) {
 	return;
 }
 
-define( 'MWSTAKE_MEDIAWIKI_COMPONENT_DEEPL_TRANSLATOR_VERSION', '1.0.2' );
+define( 'MWSTAKE_MEDIAWIKI_COMPONENT_DEEPL_TRANSLATOR_VERSION', '1.0.3' );
 
 MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-translator', static function () {
 	$GLOBALS['wgServiceWiringFiles'][] = __DIR__ . '/ServiceWiring.php';

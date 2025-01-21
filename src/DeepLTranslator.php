@@ -10,7 +10,9 @@ use MWHttpRequest;
 use Status;
 
 class DeepLTranslator {
-	protected const PARAM_AUTH_KEY = 'auth_key';
+	protected const AUTH_HEADER_NAME = 'Authorization';
+	protected const AUTH_HEADER_PREFIX = 'DeepL-Auth-Key';
+
 	protected const PARAM_TEXT = 'text';
 	protected const PARAM_SOURCE_LANG = 'source_lang';
 	protected const PARAM_TARGET_LANG = 'target_lang';
@@ -72,11 +74,13 @@ class DeepLTranslator {
 			$data = array_merge(
 				$this->makeOptions(),
 				[ 'postData' => [
-					static::PARAM_AUTH_KEY => $this->config->get( 'DeeplTranslateServiceAuth' ),
 					'type' => $type
 				] ]
 			);
 			$req = $this->requestFactory->create( $this->makeUrl( 'languages' ), $data );
+
+			$this->setAuthHeader( $req );
+
 			$status->merge( $req->execute(), true );
 		} catch ( Exception $e ) {
 			$status->fatal( $e->getMessage() );
@@ -97,7 +101,6 @@ class DeepLTranslator {
 	 */
 	protected function makePostData( $text, $sourceLang, $targetLang ) {
 		return [
-			static::PARAM_AUTH_KEY => $this->config->get( 'DeeplTranslateServiceAuth' ),
 			static::PARAM_SOURCE_LANG => $sourceLang,
 			static::PARAM_TARGET_LANG => $targetLang,
 			static::PARAM_TEXT => $text,
@@ -120,6 +123,20 @@ class DeepLTranslator {
 	}
 
 	/**
+	 * Set authentication header.
+	 * See: https://developers.deepl.com/docs/getting-started/auth#authentication
+	 *
+	 * @param MWHttpRequest $req
+	 * @return void
+	 */
+	protected function setAuthHeader( MWHttpRequest $req ): void {
+		$req->setHeader(
+			static::AUTH_HEADER_NAME,
+			static::AUTH_HEADER_PREFIX . ' ' . $this->config->get( 'DeeplTranslateServiceAuth' )
+		);
+	}
+
+	/**
 	 * @param string $text
 	 * @param string $sourceLanguage
 	 * @param string $targetLanguage
@@ -139,7 +156,11 @@ class DeepLTranslator {
 				)
 			],
 		);
-		return $this->requestFactory->create( $this->makeUrl( 'translate' ), $data );
+		$req = $this->requestFactory->create( $this->makeUrl( 'translate' ), $data );
+
+		$this->setAuthHeader( $req );
+
+		return $req;
 	}
 
 	/**

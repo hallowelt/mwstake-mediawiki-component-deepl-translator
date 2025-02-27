@@ -23,4 +23,14 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-
 	$restFilePath = wfRelativePath( __DIR__ . '/rest-routes.json', $GLOBALS['IP'] );
 
 	$GLOBALS['wgRestAPIAdditionalRouteFiles'][] = $restFilePath;
+	$GLOBALS['wgMessagesDirs']['mwstake-component-deepl-translator'] = __DIR__ . '/i18n';
+
+	$GLOBALS['mwsgManifestRegistryOverrides']['BlueSpiceFoundationConfigDefinitionRegistry'] = [
+		'merge' => [
+			'DeeplTranslateServiceAuth' =>
+				"MWStake\\MediaWiki\\Component\\DeeplTranslator\\ConfigDefinition\\ServiceAuth::getInstance",
+			'DeeplTranslateServiceUrl' =>
+				"MWStake\\MediaWiki\\Component\\DeeplTranslator\\ConfigDefinition\\ServiceUrl::getInstance"
+		]
+	];
 } );

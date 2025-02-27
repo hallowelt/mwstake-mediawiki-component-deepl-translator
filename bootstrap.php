@@ -12,7 +12,6 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-
 	$GLOBALS['mwsgDeeplTranslateServiceAuth'] = '';
 	$GLOBALS['mwsgDeeplTranslateServiceUrl'] = 'https://api-free.deepl.com/v2';
 
-
 	$GLOBALS['wgResourceModules']['ext.mws.deepltranslator'] = [
 		'scripts' => [
 			'api.js'

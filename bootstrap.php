@@ -12,7 +12,6 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-
 	$GLOBALS['mwsgDeeplTranslateServiceAuth'] = '';
 	$GLOBALS['mwsgDeeplTranslateServiceUrl'] = 'https://api-free.deepl.com/v2';
 
-
 	$GLOBALS['wgResourceModules']['ext.mws.deepltranslator'] = [
 		'scripts' => [
 			'api.js'
@@ -23,4 +22,14 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()->register( 'deepl-
 	$restFilePath = wfRelativePath( __DIR__ . '/rest-routes.json', $GLOBALS['IP'] );
 
 	$GLOBALS['wgRestAPIAdditionalRouteFiles'][] = $restFilePath;
+	$GLOBALS['wgMessagesDirs']['mwstake-component-deepl-translator'] = __DIR__ . '/i18n';
+
+	$GLOBALS['mwsgManifestRegistryOverrides']['BlueSpiceFoundationConfigDefinitionRegistry'] = [
+		'merge' => [
+			'DeeplTranslateServiceAuth' =>
+				"MWStake\\MediaWiki\\Component\\DeeplTranslator\\ConfigDefinition\\ServiceAuth::getInstance",
+			'DeeplTranslateServiceUrl' =>
+				"MWStake\\MediaWiki\\Component\\DeeplTranslator\\ConfigDefinition\\ServiceUrl::getInstance"
+		]
+	];
 } );

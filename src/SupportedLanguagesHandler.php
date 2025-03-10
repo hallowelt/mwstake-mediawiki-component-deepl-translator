@@ -5,7 +5,6 @@ namespace MWStake\MediaWiki\Component\DeeplTranslator;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class SupportedLanguagesHandler extends SimpleHandler {
@@ -36,6 +35,9 @@ class SupportedLanguagesHandler extends SimpleHandler {
 		}
 	}
 
+	/**
+	 * @return array[]
+	 */
 	public function getParamSettings() {
 		return [
 			'type' => [

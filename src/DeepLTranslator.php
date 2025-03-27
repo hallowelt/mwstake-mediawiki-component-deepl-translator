@@ -46,6 +46,10 @@ class DeepLTranslator {
 	 */
 	public function translateText( string $text, string $sourceLang, string $targetLang, array $options = [] ) {
 		$status = Status::newGood();
+		if ( !$this->isConfigured() ) {
+			$status->fatal( 'DeepL is not configured' );
+			return $status;
+		}
 		try {
 			$req = $this->getRequest( $text, $sourceLang, $targetLang, $options );
 			$status->merge( $req->execute(), true );
@@ -70,6 +74,10 @@ class DeepLTranslator {
 	 */
 	public function getSupportedLanguages( string $type = 'source' ): Status {
 		$status = Status::newGood();
+		if ( !$this->isConfigured() ) {
+			$status->fatal( 'DeepL is not configured' );
+			return $status;
+		}
 		try {
 			$data = array_merge(
 				$this->makeOptions(),
@@ -161,6 +169,13 @@ class DeepLTranslator {
 		$this->setAuthHeader( $req );
 
 		return $req;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isConfigured(): bool {
+		return $this->config->get( 'DeeplTranslateServiceAuth' ) && $this->config->get( 'DeeplTranslateServiceUrl' );
 	}
 
 	/**

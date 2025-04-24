@@ -16,7 +16,6 @@ class ServiceUrl extends StringSetting implements IOverwriteGlobal {
 		$package = static::PACKAGE_PRO;
 		return [
 			static::MAIN_PATH_FEATURE . "/$feature/$ext",
-			static::MAIN_PATH_EXTENSION . "/$ext/$feature",
 			static::MAIN_PATH_PACKAGE . "/$package/$ext",
 		];
 	}

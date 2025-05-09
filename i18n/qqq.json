@@ -1,4 +1,5 @@
 {
 	"mwstake-component-deepl-translator-config-service-url": "Config label",
+	"mwstake-component-deepl-translator-config-service-auth": "Config label",
 	"mwstake-component-deepl-translator-config-service-url-help": "Config help"
 }

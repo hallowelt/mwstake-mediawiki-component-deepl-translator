@@ -1,0 +1,5 @@
+{
+	"mwstake-component-deepl-translator-config-service-url": "DeepL API URL",
+	"mwstake-component-deepl-translator-config-service-auth": "DeepL API Schlüssel",
+	"mwstake-component-deepl-translator-config-service-url-help": "URL des DeepL API-Dienstes ohne den Endpunkt"
+}

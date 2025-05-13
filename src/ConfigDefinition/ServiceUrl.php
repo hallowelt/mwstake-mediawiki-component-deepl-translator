@@ -11,7 +11,7 @@ class ServiceUrl extends StringSetting implements IOverwriteGlobal {
 	 * @return array
 	 */
 	public function getPaths() {
-		$feature = static::FEATURE_CONTENT_STRUCTURING;
+		$feature = static::FEATURE_SYSTEM;
 		$ext = 'DeepL';
 		$package = static::PACKAGE_PRO;
 		return [

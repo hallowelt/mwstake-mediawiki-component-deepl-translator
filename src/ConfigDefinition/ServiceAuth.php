@@ -3,9 +3,9 @@
 namespace MWStake\MediaWiki\Component\DeeplTranslator\ConfigDefinition;
 
 use BlueSpice\ConfigDefinition\IOverwriteGlobal;
-use BlueSpice\ConfigDefinition\StringSetting;
+use BlueSpice\ConfigDefinition\SecretSetting;
 
-class ServiceAuth extends StringSetting implements IOverwriteGlobal {
+class ServiceAuth extends SecretSetting implements IOverwriteGlobal {
 	/**
 	 *
 	 * @return array

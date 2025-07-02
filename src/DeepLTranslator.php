@@ -2,12 +2,12 @@
 
 namespace MWStake\MediaWiki\Component\DeeplTranslator;
 
-use Config;
 use Exception;
-use FormatJson;
+use MediaWiki\Config\Config;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Json\FormatJson;
+use MediaWiki\Status\Status;
 use MWHttpRequest;
-use Status;
 
 class DeepLTranslator {
 	protected const AUTH_HEADER_NAME = 'Authorization';
@@ -29,7 +29,6 @@ class DeepLTranslator {
 	protected $requestFactory;
 
 	/**
-	 *
 	 * @param Config $config
 	 * @param HttpRequestFactory $requestFactory
 	 */
@@ -101,7 +100,6 @@ class DeepLTranslator {
 	}
 
 	/**
-	 *
 	 * @param string $text
 	 * @param string $sourceLang
 	 * @param string $targetLang
@@ -179,7 +177,6 @@ class DeepLTranslator {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	protected function makeUrl( string $endpoint = 'translate' ) {

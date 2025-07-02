@@ -6,8 +6,8 @@ use BlueSpice\ConfigDefinition\IOverwriteGlobal;
 use BlueSpice\ConfigDefinition\SecretSetting;
 
 class ServiceAuth extends SecretSetting implements IOverwriteGlobal {
+
 	/**
-	 *
 	 * @return array
 	 */
 	public function getPaths() {
@@ -21,7 +21,6 @@ class ServiceAuth extends SecretSetting implements IOverwriteGlobal {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getLabelMessageKey() {

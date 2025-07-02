@@ -6,8 +6,8 @@ use BlueSpice\ConfigDefinition\IOverwriteGlobal;
 use BlueSpice\ConfigDefinition\StringSetting;
 
 class ServiceUrl extends StringSetting implements IOverwriteGlobal {
+
 	/**
-	 *
 	 * @return array
 	 */
 	public function getPaths() {
@@ -21,7 +21,6 @@ class ServiceUrl extends StringSetting implements IOverwriteGlobal {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getLabelMessageKey() {
@@ -29,7 +28,6 @@ class ServiceUrl extends StringSetting implements IOverwriteGlobal {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getHelpMessageKey() {

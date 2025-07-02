@@ -1,16 +1,15 @@
+'use strict';
+
 module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-eslint' );
 
 	grunt.initConfig( {
 		eslint: {
 			options: {
-				cache: true
+				cache: true,
+				fix: grunt.option( 'fix' )
 			},
-			src: [
-				'**/*.{js,json}',
-				'!node_modules/**',
-				'!vendor/**'
-			]
+			all: '.'
 		}
 	} );
 

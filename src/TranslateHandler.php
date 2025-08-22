@@ -5,7 +5,6 @@ namespace MWStake\MediaWiki\Component\DeeplTranslator;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use MediaWiki\Rest\Validator\JsonBodyValidator;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class TranslateHandler extends SimpleHandler {
@@ -41,26 +40,30 @@ class TranslateHandler extends SimpleHandler {
 	}
 
 	/**
-	 * @param string $contentType
-	 * @return JsonBodyValidator|null
+	 * @return array[]
 	 */
-	public function getBodyValidator( $contentType ) {
-		if ( $contentType !== 'application/json' ) {
-			return null;
-		}
-		return new JsonBodyValidator( [
+	public function getBodyParamSettings(): array {
+		return [
 			'text' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true
 			],
 			'source_lang' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true
 			],
 			'target_lang' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true
 			],
-		] );
+		];
 	}
+
+	public function getSupportedRequestTypes(): array {
+		return [ 'application/json' ];
+	}
+
 }

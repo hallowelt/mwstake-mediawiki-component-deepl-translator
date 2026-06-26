@@ -110,7 +110,7 @@ class DeepLTranslator {
 			static::PARAM_SOURCE_LANG => $sourceLang,
 			static::PARAM_TARGET_LANG => $targetLang,
 			static::PARAM_TEXT => $text,
-			static::PARAM_TAG_HANDLING => 'xml',
+			static::PARAM_TAG_HANDLING => 'html',
 			static::PARAM_IGNORE_TAGS => 'deepl:ignore,translation:ignore'
 		];
 	}
